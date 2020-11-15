@@ -8,7 +8,7 @@
 import Foundation
 
 struct Address: Decodable {
-    let flat_area: String? // Площадь квартиры
-    let square_meter_price: String? //Рыночная стоимость м²
-    let flat_price: String? // Рыночная стоимость квартиры
+    let flat_area: String?
+    let square_meter_price: String?
+    let flat_price: String? 
 }

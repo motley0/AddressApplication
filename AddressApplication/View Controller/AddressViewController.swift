@@ -7,50 +7,58 @@
 
 import UIKit
 
-class AddressViewController: UIViewController {
+class AddressViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var addressTextField: UITextField!
     
     private let networkAddressManager = NetworkAddressManager.shared
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addressTextField.delegate = self
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            super.touchesBegan(touches, with: event)
+            view.endEditing(true)
+    }
 
     @IBAction func pressedSearchAddress() {
         networkAddressManager.fetchAddress(
             forAddress: addressTextField.text ?? ""
         ) { addresses in
             DispatchQueue.main.async {
-                if addresses.count == 0 {
-                    self.showAlert(title: "Упс!",
-                                   message: "Квартира не была найдена :(")
-                    return
-                }
-
-                let address = addresses.first
-
-                guard let flatArea = address?.flat_area,
-                      let squareMeterPrice = address?.square_meter_price,
-                      let flatPrice = address?.flat_price else {
-                    self.showAlert(title: "Упс!",
-                                   message: "Квартира не была найдена :(")
+                if addresses.count > 0,
+                   let address = addresses.first,
+                   let flatArea = address.flatArea,
+                   let squareMeterPrice = address.squareMeterPrice,
+                   let flatPrice = address.flatPrice {
+                    self.showAlert(
+                        title: "Ура, квартира найдена!",
+                        message: "Площадь квартиры: \(flatArea) м²\nСтоимость " +
+                            "м²: \(squareMeterPrice) руб.\n" +
+                            "Рыночная стоимость квартиры: \(flatPrice) руб.")
                     return
                 }
                 
-                self.showAlert(
-                    title: "Ура, квартира найдена!",
-                    message: "Площадь квартиры: \(flatArea)\nРыночная стоимость " +
-                        "м²: \(squareMeterPrice)\nРыночная стоимость квартиры: \(flatPrice)")
+                self.showAlert(title: "Упс!",
+                               message: "Квартира не была найдена :(")
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pressedSearchAddress()
+        return true
     }
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title,
                                       message: message,
                                       preferredStyle: .alert)
-        
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
     }
     
 }
-

@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите адрес тут" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKf-RO-6va">
-                                <rect key="frame" x="16" y="306.5" width="288" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="г. Москва, ул. Маршала Бирюзова, д.3, кв. 22" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lKf-RO-6va">
+                                <rect key="frame" x="16" y="187.5" width="288" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hw-Zo-0Je">
-                                <rect key="frame" x="114" y="482" width="92" height="42"/>
+                                <rect key="frame" x="114" y="251.5" width="92" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="JEa-yh-i9F"/>
                                 </constraints>
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Узнай рыночную стоимость квартиры 🙈🙉🙊" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="jol-Qk-0wR">
-                                <rect key="frame" x="16" y="140" width="288" height="57.5"/>
+                                <rect key="frame" x="16" y="70" width="288" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,12 +45,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="1hw-Zo-0Je" secondAttribute="trailing" constant="114" id="8mi-Tp-eBC"/>
                             <constraint firstItem="jol-Qk-0wR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DK8-rw-8U0"/>
                             <constraint firstItem="1hw-Zo-0Je" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="114" id="Dao-Jm-1Dl"/>
-                            <constraint firstItem="lKf-RO-6va" firstAttribute="top" secondItem="jol-Qk-0wR" secondAttribute="bottom" constant="109" id="HCQ-ZT-Q8g"/>
+                            <constraint firstItem="lKf-RO-6va" firstAttribute="top" secondItem="jol-Qk-0wR" secondAttribute="bottom" constant="60" id="HCQ-ZT-Q8g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lKf-RO-6va" secondAttribute="trailing" constant="16" id="HaT-88-79t"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1hw-Zo-0Je" secondAttribute="bottom" constant="44" id="K8U-9Q-xID"/>
-                            <constraint firstItem="jol-Qk-0wR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="aSW-ms-EMh"/>
+                            <constraint firstItem="jol-Qk-0wR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="aSW-ms-EMh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jol-Qk-0wR" secondAttribute="trailing" constant="16" id="oeP-he-yKX"/>
                             <constraint firstItem="lKf-RO-6va" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wJA-hB-5wd"/>
+                            <constraint firstItem="1hw-Zo-0Je" firstAttribute="top" secondItem="lKf-RO-6va" secondAttribute="bottom" constant="30" id="zwa-JH-8zv"/>
                         </constraints>
                     </view>
                     <connections>

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class NetworkAddressManager {
     
@@ -15,40 +16,26 @@ class NetworkAddressManager {
     private let xSecret = "085b333c95a84ab70460c15d88b11c0e4fd286ca"
     private let urlStr = "https://cleaner.dadata.ru/api/v1/clean/address"
     
-    func fetchAddress(forAddress address: String, onCompletion: @escaping (([Address]) -> Void)) {
-        guard let url = URL(string: urlStr) else { return }
-        let request = createURLRequest(url: url, address: address)
-        
-        URLSession.shared.dataTask(with: request) { (data, _, _) in
-            if let data = data {
-                let addresses = self.parseJSON(data: data)
-                onCompletion(addresses)
-            } else {
-                onCompletion([])
-            }
-        }.resume()
-    }
-    
-    private func createURLRequest(url: URL, address: String) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Token \(token)", forHTTPHeaderField: "Authorization")
-        request.setValue("\(xSecret)", forHTTPHeaderField: "X-Secret")
-        request.httpBody = "[\"\(address)\"]".data(using: .utf8)
-        
-        return request
-    }
-    
-    private func parseJSON(data: Data) -> [Address] {
-        do {
-           return try JSONDecoder().decode([Address].self, from: data)
-        } catch let error {
-            print(error)
-            return []
-        }
-    }
-    
     private init() {}
+    
+    func fetchAddress(forAddress address: String, completion: @escaping (([Address]) -> Void)) {
+        let headers: HTTPHeaders = ["Content-Type": "application/json",
+                                    "Authorization": "Token \(token)",
+                                    "X-Secret": "\(xSecret)"]
+        let data = Data("[\"\(address)\"]".utf8)
+        
+        AF.upload(data, to: urlStr, method: .post, headers: headers)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    let addresses = Address.getAddresses(from: value) ?? []
+                    completion(addresses)
+                case .failure(let error):
+                    print(error)
+                    completion([])
+                }
+            }
+    }
 
 }
